@@ -3,8 +3,6 @@ import { EntityManager } from "typeorm";
 
 import OnboardingService from "../../../services/onboarding";
 
-export const AUTHENTICATE = false;
-
 export async function GET(req: MedusaRequest, res: MedusaResponse) {
   const onboardingService: OnboardingService =
     req.scope.resolve("onboardingService");
