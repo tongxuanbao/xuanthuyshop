@@ -7,6 +7,11 @@ const store = require("./store.config.json")
 const nextConfig = withStoreConfig({
   features: store.features,
   reactStrictMode: true,
+  experimental: {
+    serverActions: {
+      allowedOrigins: ['xuanthuyshop.com', 'ideal-funicular-69xr4jq76cr9jg-8000.app.github.dev', 'localhost:8000'],
+    },
+  },
   images: {
     remotePatterns: [
       {
