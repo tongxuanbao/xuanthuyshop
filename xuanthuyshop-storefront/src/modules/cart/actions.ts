@@ -79,6 +79,7 @@ export async function addToCart({
   countryCode: string
 }) {
   const cart = await getOrSetCart(countryCode).then((cart) => cart)
+  console.log("addToCart, cartID", cart);
 
   if (!cart) {
     return "Missing cart ID"
