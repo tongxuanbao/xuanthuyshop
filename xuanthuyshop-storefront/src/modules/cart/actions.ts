@@ -41,7 +41,7 @@ export async function getOrSetCart(countryCode: string) {
 
   if (!cart) {
     cart = await createCart({ region_id }).then((res) => res)
-    cart && cookies().set("_medusa_cart_id", cart.id)
+    cart && cookies().set("_medusa_cart_id", cart.id, {secure: true})
     revalidateTag("cart")
   }
 
@@ -79,7 +79,6 @@ export async function addToCart({
   countryCode: string
 }) {
   const cart = await getOrSetCart(countryCode).then((cart) => cart)
-  console.log("addToCart, cartID", cart);
 
   if (!cart) {
     return "Missing cart ID"
