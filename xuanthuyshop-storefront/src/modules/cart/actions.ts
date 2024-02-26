@@ -41,7 +41,10 @@ export async function getOrSetCart(countryCode: string) {
 
   if (!cart) {
     cart = await createCart({ region_id }).then((res) => res)
-    cart && cookies().set("_medusa_cart_id", cart.id, {secure: true})
+    cart && cookies().set("_medusa_cart_id", cart.id, { 
+      expires: 86400, 
+      secure: true 
+    })
     revalidateTag("cart")
   }
 
