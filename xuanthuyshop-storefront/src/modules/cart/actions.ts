@@ -41,13 +41,7 @@ export async function getOrSetCart(countryCode: string) {
 
   if (!cart) {
     cart = await createCart({ region_id }).then((res) => res)
-    cart && cookies().set("_medusa_cart_id", cart.id, { 
-      // domain: "www.xuanthuyshop.com",
-      expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000), 
-      // secure: true,
-      // sameSite: "none",
-      // path: "/",
-    })
+    cart && cookies().set("_medusa_cart_id", cart.id)
     revalidateTag("cart")
   }
 
