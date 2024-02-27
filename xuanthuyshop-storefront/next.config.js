@@ -9,7 +9,7 @@ const nextConfig = withStoreConfig({
   reactStrictMode: true,
   experimental: {
     serverActions: {
-      allowedOrigins: ['xuanthuyshop.com', 'www.xuanthuyshop.com', 'ideal-funicular-69xr4jq76cr9jg-8000.app.github.dev', 'localhost:8000'],
+      allowedOrigins: ['xuanthuyshop.com', 'www.xuanthuyshop.com', 'api.xuanthuyshop.com', 'ideal-funicular-69xr4jq76cr9jg-8000.app.github.dev', 'localhost:8000'],
     },
   },
   images: {
