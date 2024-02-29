@@ -109,7 +109,7 @@ const projectConfig = {
 /** @type {import('@medusajs/medusa').ConfigModule["featureFlags"]} */
 const featureFlags = {
   product_categories: true,
-},
+};
 
 /** @type {import('@medusajs/medusa').ConfigModule} */
 module.exports = {
