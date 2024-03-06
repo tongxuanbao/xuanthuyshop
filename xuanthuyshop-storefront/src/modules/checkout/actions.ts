@@ -129,12 +129,12 @@ export async function setAddresses(currentState: unknown, formData: FormData) {
 
   data.billing_address = data.shipping_address;
 
-  // try {
-  //   await updateCart(cartId, data)
-  //   revalidateTag("cart")
-  // } catch (error: any) {
-  //   return error.toString()
-  // }
+  try {
+    await updateCart(cartId, data)
+    revalidateTag("cart")
+  } catch (error: any) {
+    return error.toString()
+  }
 
   console.log("shipping_address.country_code", data.shipping_address)
 
