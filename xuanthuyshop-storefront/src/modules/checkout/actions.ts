@@ -116,7 +116,7 @@ export async function setAddresses(currentState: unknown, formData: FormData) {
       first_name: formData.get("shipping_address.first_name"),
       last_name: formData.get("shipping_address.last_name"),
       address_1: formData.get("shipping_address.address_1"),
-      address_2: "",
+      address_2: formData.get("shipping_address.address_1"),
       company: formData.get("shipping_address.company"),
       postal_code: formData.get("shipping_address.postal_code"),
       city: formData.get("shipping_address.city"),
@@ -127,33 +127,19 @@ export async function setAddresses(currentState: unknown, formData: FormData) {
     email: formData.get("email"),
   } as StorePostCartsCartReq
 
-  const sameAsBilling = formData.get("same_as_billing")
+  data.billing_address = data.shipping_address;
 
-  if (sameAsBilling === "on") data.billing_address = data.shipping_address
+  // try {
+  //   await updateCart(cartId, data)
+  //   revalidateTag("cart")
+  // } catch (error: any) {
+  //   return error.toString()
+  // }
 
-  if (sameAsBilling !== "on")
-    data.billing_address = {
-      first_name: formData.get("billing_address.first_name"),
-      last_name: formData.get("billing_address.last_name"),
-      address_1: formData.get("billing_address.address_1"),
-      address_2: "",
-      company: formData.get("billing_address.company"),
-      postal_code: formData.get("billing_address.postal_code"),
-      city: formData.get("billing_address.city"),
-      country_code: formData.get("billing_address.country_code"),
-      province: formData.get("billing_address.province"),
-      phone: formData.get("billing_address.phone"),
-    } as StorePostCartsCartReq
-
-  try {
-    await updateCart(cartId, data)
-    revalidateTag("cart")
-  } catch (error: any) {
-    return error.toString()
-  }
+  console.log("shipping_address.country_code", data.shipping_address)
 
   redirect(
-    `/${formData.get("shipping_address.country_code")}/checkout?step=delivery`
+    `/${formData.get("shipping_address.country_code") ?? "vn"}/checkout?step=delivery`
   )
 }
 

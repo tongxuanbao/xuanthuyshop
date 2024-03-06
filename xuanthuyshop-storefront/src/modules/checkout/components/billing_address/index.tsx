@@ -14,6 +14,7 @@ const BillingAddress = ({
     "billing_address.first_name": cart?.billing_address?.first_name || "",
     "billing_address.last_name": cart?.billing_address?.last_name || "",
     "billing_address.address_1": cart?.billing_address?.address_1 || "",
+    "billing_address.address_2": cart?.billing_address?.address_2 || "",
     "billing_address.company": cart?.billing_address?.company || "",
     "billing_address.postal_code": cart?.billing_address?.postal_code || "",
     "billing_address.city": cart?.billing_address?.city || "",
@@ -28,6 +29,7 @@ const BillingAddress = ({
       "billing_address.first_name": cart?.billing_address?.first_name || "",
       "billing_address.last_name": cart?.billing_address?.last_name || "",
       "billing_address.address_1": cart?.billing_address?.address_1 || "",
+      "billing_address.address_2": cart?.billing_address?.address_2 || "",
       "billing_address.company": cart?.billing_address?.company || "",
       "billing_address.postal_code": cart?.billing_address?.postal_code || "",
       "billing_address.city": cart?.billing_address?.city || "",
@@ -52,7 +54,7 @@ const BillingAddress = ({
     <>
       <div className="grid grid-cols-2 gap-4">
         <Input
-          label="First name"
+          label="Họ"
           name="billing_address.first_name"
           autoComplete="given-name"
           value={formData["billing_address.first_name"]}
@@ -60,7 +62,7 @@ const BillingAddress = ({
           required
         />
         <Input
-          label="Last name"
+          label="Tên"
           name="billing_address.last_name"
           autoComplete="family-name"
           value={formData["billing_address.last_name"]}
@@ -68,7 +70,7 @@ const BillingAddress = ({
           required
         />
         <Input
-          label="Address"
+          label="Địa chỉ"
           name="billing_address.address_1"
           autoComplete="address-line1"
           value={formData["billing_address.address_1"]}
@@ -76,43 +78,36 @@ const BillingAddress = ({
           required
         />
         <Input
-          label="Company"
-          name="billing_address.company"
-          value={formData["billing_address.company"]}
-          onChange={handleChange}
-          autoComplete="organization"
-        />
-        <Input
-          label="Postal code"
-          name="billing_address.postal_code"
-          autoComplete="postal-code"
-          value={formData["billing_address.postal_code"]}
+          label="Xã / Phường"
+          name="billing_address.address_2"
+          autoComplete="address-line2"
+          value={formData["billing_address.address_2"]}
           onChange={handleChange}
           required
         />
         <Input
-          label="City"
+          label="Quận / Huyện"
+          name="billing_address.province"
+          autoComplete="address-level1"
+          value={formData["billing_address.province"]}
+          onChange={handleChange}
+        />
+        <Input
+          label="Thành phố"
           name="billing_address.city"
           autoComplete="address-level2"
           value={formData["billing_address.city"]}
           onChange={handleChange}
           required
         />
-        <CountrySelect
+        {/* <CountrySelect
           name="billing_address.country_code"
           autoComplete="country"
           region={cart?.region}
           value={formData["billing_address.country_code"]}
           onChange={handleChange}
           required
-        />
-        <Input
-          label="State / Province"
-          name="billing_address.province"
-          autoComplete="address-level1"
-          value={formData["billing_address.province"]}
-          onChange={handleChange}
-        />
+        /> */}
         <Input
           label="Phone"
           name="billing_address.phone"

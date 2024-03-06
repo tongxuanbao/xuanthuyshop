@@ -81,18 +81,6 @@ const Addresses = ({
               cart={cart}
             />
 
-            {!sameAsSBilling && (
-              <div>
-                <Heading
-                  level="h2"
-                  className="text-3xl-regular gap-x-4 pb-6 pt-8"
-                >
-                  Billing address
-                </Heading>
-
-                <BillingAddress cart={cart} countryCode={countryCode} />
-              </div>
-            )}
             <SubmitButton className="mt-6">Continue to delivery</SubmitButton>
             <ErrorMessage error={message} />
           </div>
