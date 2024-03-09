@@ -46,7 +46,7 @@ const DistrictSelect = forwardRef<
                     <NativeSelect
                         placeholder={"Đang tải..."}
                         loading={true}
-                        value={""}
+                        defaultValue={""}
                     />
                 )}
                 {!isFetching && (

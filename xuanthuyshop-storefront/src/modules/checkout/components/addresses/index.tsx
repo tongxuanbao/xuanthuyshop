@@ -13,14 +13,12 @@ import { Heading, Text, useToggleState } from "@medusajs/ui";
 import Divider from "@modules/common/components/divider";
 import Spinner from "@modules/common/icons/spinner";
 
-import BillingAddress from "../billing_address";
 import ShippingAddress from "../shipping-address";
 import { setAddresses } from "../../actions";
 import { SubmitButton } from "../submit-button";
 import { useFormState } from "react-dom";
 import ErrorMessage from "../error-message";
 import compareAddresses from "@lib/util/compare-addresses";
-import CitySelect from "../city-select";
 
 const Addresses = ({
     cart,
@@ -98,7 +96,7 @@ const Addresses = ({
                         {cart && cart.shipping_address ? (
                             <div className="flex items-start gap-x-8">
                                 <div className="flex items-start gap-x-1 w-full">
-                                    <div className="flex flex-col w-1/2">
+                                    <div className="flex flex-col w-2/3">
                                         <Text className="txt-medium-plus text-ui-fg-base mb-1">
                                             Địa chỉ
                                         </Text>
@@ -107,19 +105,14 @@ const Addresses = ({
                                             {cart.shipping_address.last_name}
                                         </Text>
                                         <Text className="txt-medium text-ui-fg-subtle">
-                                            {cart.shipping_address.address_1}{" "}
-                                            {cart.shipping_address.address_2}
+                                            {cart.shipping_address.address_1}
                                         </Text>
                                         <Text className="txt-medium text-ui-fg-subtle">
-                                            {cart.shipping_address.postal_code},{" "}
-                                            {cart.shipping_address.city}
-                                        </Text>
-                                        <Text className="txt-medium text-ui-fg-subtle">
-                                            {cart.shipping_address.country_code?.toUpperCase()}
+                                            {cart.shipping_address.company}
                                         </Text>
                                     </div>
 
-                                    <div className="flex flex-col w-1/2">
+                                    <div className="flex flex-col w-1/3">
                                         <Text className="txt-medium-plus text-ui-fg-base mb-1">
                                             Liên hệ
                                         </Text>

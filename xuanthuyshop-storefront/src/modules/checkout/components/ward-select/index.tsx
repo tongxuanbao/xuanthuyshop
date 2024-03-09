@@ -36,14 +36,14 @@ const WardSelect = forwardRef<
             {!district && (
                 <NativeSelect
                     placeholder={"Chọn quận / huyện trước"}
-                    value={""}
+                    defaultValue={""}
                 />
             )}
             {isFetching && !!district && (
                 <NativeSelect
                     placeholder={"Đang tải..."}
                     loading={true}
-                    value={""}
+                    defaultValue={""}
                 />
             )}
             {!isFetching && !!district && (

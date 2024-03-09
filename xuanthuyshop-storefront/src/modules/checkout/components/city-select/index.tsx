@@ -34,7 +34,7 @@ const CitySelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
                     <NativeSelect
                         placeholder={"Đang tải..."}
                         loading={true}
-                        value={""}
+                        defaultValue={""}
                     />
                 )}
                 {!isFetching && (

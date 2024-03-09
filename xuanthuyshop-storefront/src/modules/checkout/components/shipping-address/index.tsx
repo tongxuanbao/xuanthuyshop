@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import { Cart, Customer } from "@medusajs/medusa";
 import Input from "@modules/common/components/input";
 import AddressSelect from "../address-select";
@@ -35,13 +35,6 @@ const ShippingAddress = ({
         "shipping_address.phone": cart?.shipping_address?.phone || "",
     });
 
-    const fullAddressLabel = {
-        "shipping_address.address_1": "",
-        "shipping_address.address_2": "",
-        "shipping_address.province": "",
-        "shipping_address.city": "203",
-    };
-
     const countriesInRegion = useMemo(
         () => cart?.region.countries.map((c) => c.iso_2),
         [cart?.region]
@@ -58,6 +51,20 @@ const ShippingAddress = ({
         [customer?.shipping_addresses, countriesInRegion]
     );
 
+    const cityRef = useRef<HTMLSelectElement>(null);
+    const districtRef = useRef<HTMLSelectElement>(null);
+    const wardRef = useRef<HTMLSelectElement>(null);
+    const getFullAddress = () => {
+        const selectedCityLabel =
+            cityRef.current?.options[cityRef.current.selectedIndex].label ?? "";
+        const selectedDistrictLabel =
+            districtRef.current?.options[districtRef.current.selectedIndex]
+                .label ?? "";
+        const selectedWardLabel =
+            wardRef.current?.options[wardRef.current.selectedIndex].label ?? "";
+        return `${selectedWardLabel}, ${selectedDistrictLabel}, ${selectedCityLabel}`;
+    };
+
     useEffect(() => {
         setFormData({
             "shipping_address.first_name":
@@ -68,7 +75,8 @@ const ShippingAddress = ({
                 cart?.shipping_address?.address_1 || "",
             "shipping_address.address_2":
                 cart?.shipping_address?.address_2 || "",
-            "shipping_address.company": cart?.shipping_address?.company || "",
+            "shipping_address.company":
+                cart?.shipping_address?.company || getFullAddress() || "",
             "shipping_address.postal_code":
                 cart?.shipping_address?.postal_code || "",
             "shipping_address.city": cart?.shipping_address?.city || "203",
@@ -85,16 +93,20 @@ const ShippingAddress = ({
             HTMLInputElement | HTMLInputElement | HTMLSelectElement
         >
     ) => {
+        const fullAddress = getFullAddress();
+
         if (e.target.name === "shipping_address.city") {
             setFormData({
                 ...formData,
                 "shipping_address.province": "",
                 "shipping_address.address_2": "",
+                "shipping_address.company": fullAddress,
                 [e.target.name]: `${e.target.value}`,
             });
         } else {
             setFormData({
                 ...formData,
+                "shipping_address.company": fullAddress,
                 [e.target.name]: `${e.target.value}`,
             });
         }
@@ -139,6 +151,7 @@ const ShippingAddress = ({
                     required
                 />
                 <CitySelect
+                    ref={cityRef}
                     placeholder="Thành phố / Tỉnh"
                     name="shipping_address.city"
                     value={formData["shipping_address.city"]}
@@ -146,6 +159,7 @@ const ShippingAddress = ({
                     required
                 />
                 <DistrictSelect
+                    ref={districtRef}
                     placeholder="Quận / Huyện"
                     name="shipping_address.province"
                     value={formData["shipping_address.province"]}
@@ -154,11 +168,17 @@ const ShippingAddress = ({
                     required
                 />
                 <WardSelect
+                    ref={wardRef}
                     name="shipping_address.address_2"
                     value={formData["shipping_address.address_2"]}
                     district={+formData["shipping_address.province"]}
                     onChange={handleChange}
                     required
+                />
+                <input
+                    type="hidden"
+                    name="shipping_address.company"
+                    defaultValue={getFullAddress()}
                 />
             </div>
             <Divider className="my-8" />
