@@ -120,7 +120,7 @@ export async function setAddresses(currentState: unknown, formData: FormData) {
             company: formData.get("shipping_address.company"),
             postal_code: formData.get("shipping_address.postal_code"),
             city: formData.get("shipping_address.city"),
-            country_code: formData.get("shipping_address.country_code"),
+            country_code: formData.get("shipping_address.country_code") || "vn",
             province: formData.get("shipping_address.province"),
             phone: formData.get("shipping_address.phone"),
         },

@@ -27,8 +27,6 @@ const Shipping: React.FC<ShippingProps> = ({
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
-    console.log("availableShippingMethods", availableShippingMethods);
-
     const searchParams = useSearchParams();
     const router = useRouter();
     const pathname = usePathname();
@@ -78,7 +76,7 @@ const Shipping: React.FC<ShippingProps> = ({
                         }
                     )}
                 >
-                    Phương thức vận chuyển
+                    Vận chuyển
                     {!isOpen && cart.shipping_methods.length > 0 && (
                         <CheckCircleSolid />
                     )}
@@ -159,7 +157,7 @@ const Shipping: React.FC<ShippingProps> = ({
                         isLoading={isLoading}
                         disabled={!cart.shipping_methods[0]}
                     >
-                        Continue to payment
+                        Đến bước Thanh toán
                     </Button>
                 </div>
             ) : (
@@ -168,7 +166,7 @@ const Shipping: React.FC<ShippingProps> = ({
                         {cart && cart.shipping_methods.length > 0 && (
                             <div className="flex flex-col w-1/3">
                                 <Text className="txt-medium-plus text-ui-fg-base mb-1">
-                                    Method
+                                    Phương thức
                                 </Text>
                                 <Text className="txt-medium text-ui-fg-subtle">
                                     {

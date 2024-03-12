@@ -59,7 +59,7 @@ const Addresses = ({
                     level="h2"
                     className="flex flex-row text-3xl-regular gap-x-2 items-baseline"
                 >
-                    Địa chỉ giao hàng
+                    Địa chỉ
                     {!isOpen && <CheckCircleSolid />}
                 </Heading>
                 {!isOpen && cart?.shipping_address && (
@@ -85,7 +85,7 @@ const Addresses = ({
                         />
 
                         <SubmitButton className="mt-6">
-                            Đến bước tiếp theo
+                            Đến bước Vận chuyển
                         </SubmitButton>
                         <ErrorMessage error={message} />
                     </div>
