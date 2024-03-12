@@ -235,7 +235,7 @@ const Payment = ({
                                         {cart.payment_session.provider_id ===
                                             "stripe" && cardBrand
                                             ? cardBrand
-                                            : "Another step will appear"}
+                                            : "Nhận tiền mặt khi nhận hàng"}
                                     </Text>
                                 </div>
                             </div>
