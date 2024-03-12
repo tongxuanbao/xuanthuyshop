@@ -13,7 +13,7 @@ import axios from "axios";
 const GIAO_HANG_HANH_API_TOKEN = process.env.GIAO_HANG_NHANH_API_TOKEN ?? "";
 const GIAO_HANG_NHANH_SHOP_ID = 4927242;
 const GIAO_HANG_NHANH_DEFAULT_WEIGHT = 200;
-const GIAO_HANG_NHANH_DEFAULT_SERVICE_ID = 53320;
+const GIAO_HANG_HANH_SON_TRA_DISCTRICT_ID = 1528;
 
 type GiaoHangNhanhFeeRequestParams = {
     to_district_id: number;
@@ -40,9 +40,29 @@ type GiaoHangNhanhFeeResponse = {
     data: GiaoHangNhanhFeeData;
 };
 
+async function fetchFirstAvailableService(
+    to_district: number
+): Promise<number> {
+    const { data } = await axios.get(
+        "https://online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/available-services",
+        {
+            headers: {
+                token: GIAO_HANG_HANH_API_TOKEN,
+            },
+            params: {
+                shop_id: GIAO_HANG_NHANH_SHOP_ID,
+                from_district: GIAO_HANG_HANH_SON_TRA_DISCTRICT_ID,
+                to_district,
+            },
+        }
+    );
+    return parseInt(data.data[0].service_id);
+}
+
 async function fetchGiaoHangNhanhWard(
     params: GiaoHangNhanhFeeRequestParams
 ): Promise<GiaoHangNhanhFeeData> {
+    const service_id = await fetchFirstAvailableService(params.to_district_id);
     const { data } = await axios.get<GiaoHangNhanhFeeResponse>(
         "https://online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/fee",
         {
@@ -53,7 +73,7 @@ async function fetchGiaoHangNhanhWard(
                 ...params,
                 shop_id: GIAO_HANG_NHANH_SHOP_ID,
                 weight: GIAO_HANG_NHANH_DEFAULT_WEIGHT,
-                service_id: GIAO_HANG_NHANH_DEFAULT_SERVICE_ID,
+                service_id,
                 insurance_value: params.cod_value,
             },
         }

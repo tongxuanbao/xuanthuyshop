@@ -99,7 +99,14 @@ const Shipping: React.FC<ShippingProps> = ({
                 <div>
                     <div className="pb-8">
                         <RadioGroup
-                            value={cart.shipping_methods[0]?.shipping_option_id}
+                            value={
+                                availableShippingMethods?.some(
+                                    (m) => m.amount === cart.shipping_total
+                                )
+                                    ? cart.shipping_methods[0]
+                                          ?.shipping_option_id
+                                    : undefined
+                            }
                             onChange={(value: string) => handleChange(value)}
                         >
                             {availableShippingMethods ? (
@@ -108,6 +115,11 @@ const Shipping: React.FC<ShippingProps> = ({
                                         <RadioGroup.Option
                                             key={option.id}
                                             value={option.id}
+                                            onClick={() =>
+                                                cart.shipping_total !==
+                                                    option.amount &&
+                                                handleChange(option.id!)
+                                            }
                                             className={clx(
                                                 "flex items-center justify-between text-small-regular cursor-pointer py-4 border rounded-rounded px-8 mb-2 hover:shadow-borders-interactive-with-active",
                                                 {
