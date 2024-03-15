@@ -126,7 +126,7 @@ class GiaoHangNhanhService extends AbstractFulfillmentService {
     ): Promise<number> {
         const { shipping_address } = cart;
         const { address_2, province } = shipping_address;
-        let total = 123;
+        let total = 15000;
         try {
             const data = await fetchGiaoHangNhanhWard({
                 to_district_id: +province,
