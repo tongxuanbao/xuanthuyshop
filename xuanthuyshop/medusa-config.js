@@ -86,7 +86,7 @@ const plugins = [
       settings: {
         products: {
           indexSettings: {
-            searchableAttributes: ["title", "description"],
+            searchableAttributes: ["title", "description", "collection_title"],
             attributesToRetrieve: [
               "id",
               "title",
@@ -100,14 +100,6 @@ const plugins = [
               "collection_handle",
               "images",
             ],
-          },
-          transformer: (product) => {
-            let colection = product.collections.reduce((acc, collection, "") => acc +
-            return {
-              title: product.title,
-              description: product.description,
-              colection
-            }
           },
         },
       },
